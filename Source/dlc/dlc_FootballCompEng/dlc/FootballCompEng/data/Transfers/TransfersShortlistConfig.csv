@@ -1,8 +1,8 @@
 ,Scoring Criteria Weights,,,"// the weights are multiplied with the score returned by the evaluation criteria [0, 1.f]",,,,,
 ,Overall,Potential,Age,Position,Free Agents,Pre Contract,Loan Listed,Transfer Listed,Monitored
-Improve squad,1.31,0,1,1,1.5,1.2,0,1.5,2
-Next big thing,0.8,2,0.5,1,1.5,1.2,0,1.1,2
-Loans,0.95,1.05,0.5,1,0,0,1,0,1
+Improve squad,1.31,0.5,1,1,1.5,1.2,0,1.5,3
+Next big thing,0.8,2,-0.5,0,0,0,0,0,5
+Loans,0.95,1.05,0.5,1,0,0,1,0,2
 ,,,,,,,,,
 ,Position Penalty,,,,,,,,
 ,Preffered 1,Preffered 2,Preffered 3,Preffered 4,,,,,
@@ -13,7 +13,7 @@ Num Shortlisted Players,6,,// The number of random players which actually get pi
 Big Thing or Loan Overall Threshold,79,,,,,,,,
 Max Age Improve Squad,30,,,,,,,,
 Max Age Next Big Thing,21,,,,,,,,
-Max Age Loan,31,,,,,,,,
+Max Age Loan,22,,,,,,,,
 ,,,,,,,,,
 Improve Squad Overall Min Threshold,1.06,,// relative weakest area average ,,,,,,
 Improve Squad Overall Max Threshold,1.12,,,,,,,,
@@ -21,14 +21,14 @@ Improve Squad Overall Max Threshold,1.12,,,,,,,,
 Improve Squad Bias Overall,79,81,100,,// Overall values lower than this value get the respective bias,,,,
 Improve Squad Bias Value,0.04,0.05,0.06,,// This value is added to the improve squad overall max threshold,,,,
 ,,,,,,,,,
-Loan Overall Min Threshold,0.96,,// relative weakest area average ,,,,,,
-Loan Overall Max Threshold,1.03,,,,,,,,
+Loan Overall Min Threshold,1.03,,// relative weakest area average ,,,,,,
+Loan Overall Max Threshold,1.12,,,,,,,,
 ,,,,,,,,,
-Next Big Thing Overall Min Threshold,0.8,,// relative weakest area average ,,,,,,
-Next Big Thing Overall Max Threshold,0.9,,,,,,,,
+Next Big Thing Overall Min Threshold,0.98,,// relative weakest area average ,,,,,,
+Next Big Thing Overall Max Threshold,1.12,,,,,,,,
 ,,,,,,,,,
-Next Big Thing Potential Min Threshold,0.96,,// relative weakest area average ,,,,,,
-Next Big Thing Potential Max Threshold,1.2,,,,,,,,
+Next Big Thing Potential Min Threshold,1.06,,// relative weakest area average ,,,,,,
+Next Big Thing Potential Max Threshold,1.18,,,,,,,,
 ,,,,,,,,,
 Random Activity Chance Inside Deadline Day,50,,// Change to generate transfer activity for players that are not transfer / loan listed,,,,,,
 Random Activity Chance Inside Transfer Window,50,,,,,,,,
