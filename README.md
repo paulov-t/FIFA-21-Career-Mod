@@ -45,7 +45,7 @@
 - Generated Youth players rating are much more appropriate to the level and you will now longer be able to build a super Youth Team in the 1st season
 
 ## Career Hub
-- The UI now has Kit Numbers and Injury list in the Squad Tab
+- The Main UI of the Career Mode now has Kit Numbers and Injury list in the Squad Tab
 
 ## Team Licensing
 Licensed (Names and Badges) the following teams:
@@ -53,7 +53,7 @@ Licensed (Names and Badges) the following teams:
 - Roma
 
 ## How to install
-1) Download Paulv2k4 FIFA 21 Modding Tool - Version 2021.5: Link (https://www.fifa-mods.com/Download-FIFA-Mods/Mod/paulv2k4-FIFA-21-Modding-Tool---Version-2021.5/b9e48491-f588-4f0e-8cd4-4fa60803ef8b)
+1) Download Paulv2k4 FIFA 21 Modding Tool - Version 2021.7.1: Link (https://www.fifa-mods.com/Download-FIFA-Mods/Mod/Paulv2k4-FIFA-21-Modding-Tool---Version-2021.7.1/aaf9025b-8875-4535-87b0-20dccd9b2de9
 2) Download this Mod and extract the .lmod to any location
 3) Launch Paulv2k4 FIFA 21 Modding Tool EXE
 4) Click Launcher
