@@ -55,6 +55,10 @@ Licensed (Names and Badges) the following teams:
 - Juventus
 - Roma
 
+## Form and Sharpness
+- Form and team league position has much more of an affect on your and AI players (players can now lose 10 points of an attribute due to form)
+- Sharpness has been balanced so AI are affected with the same modifier as the User (50) 
+
 ## How to install
 1) Download Latest Paulv2k4 FIFA 21 Modding Tool (https://www.paulv2k4.com/FIFA21/Download/Download-Latest-Paulv2k4-FIFA-21-Mod-Tool)
 2) Download this Mod and extract the .lmod to any location
