@@ -1,0 +1,392 @@
+{
+    "presetType": "CP_PRESET_11_V_11",
+    "attributeCategories":
+    [
+		{
+		  "name":"INFO",
+          "filters": {
+						"areFiltersAttributes":false,
+						"data":
+          [
+			{
+				"name": "ABOUT_ME",
+				"filters": {
+					"areFiltersAttributes":true,
+					"data":
+				[
+				  {
+					"name": "FIRST_NAME",
+					"isEditable": false,
+					"componentType": "INPUT_TEXT"
+				  },
+				  {
+					"name": "SURNAME",
+					"isEditable": false,
+					"componentType": "INPUT_TEXT"
+				  },
+				  {
+					"name": "KNOWN_AS",
+					"isEditable": false,
+					"componentType": "INPUT_TEXT"
+				  },
+				  {
+					"name": "COMMENTARY_NAME",
+					"componentType": "LIST"
+				  },
+				  {
+					"name": "KIT_NAME",
+					"maxLength": 12,
+					"componentType": "INPUT_TEXT"
+				  },
+				  {
+					"name": "TEAM",
+					"isEditable": false,
+					"componentType": "LIST"
+				  },
+				  {
+					"name": "KIT_NUMBER",
+					"minValue": 1,
+					"maxValue": 99,
+					"componentType": "TOGGLE"
+				  },
+				  {
+					"name": "NATIONALITY",
+					"isEditable": false,
+					"componentType": "LIST"
+				  },
+				  {
+					"name": "BIRTH_YEAR",
+					"isEditable":false,
+					"minValue": 1996,
+					"maxValue": 2003,
+					"componentType": "TOGGLE"
+				  },
+				  {
+					"name": "BIRTH_MONTH",
+					"isEditable": false,
+					"minValue": 1,
+					"maxValue": 12,
+					"componentType": "TOGGLE"
+				  },
+				  {
+					"name": "BIRTH_DAY",
+					"isEditable": false,
+					"minValue": 1,
+					"maxValue": 31,
+					"componentType": "TOGGLE"
+				  }
+				]
+			}
+		}
+		  ]
+		}
+	},
+		{
+		"name": "ATHLETIC",
+		"filters": {
+			"areFiltersAttributes":false,
+			"data":
+		[
+		  {
+			"name": "BODY",
+			"filters": {
+				"areFiltersAttributes":true,
+				"data":
+				[
+			  {
+				"name": "HEIGHT",
+				"isEditable": false,
+				"minValue": 160,
+				"maxValue": 205,
+				"componentType": "SLIDER"
+			  },
+			  {
+				"name": "WEIGHT",
+				"isEditable": false,
+				"minValue": 45,
+				"maxValue": 115,
+				"componentType": "SLIDER"
+			  }
+			]
+			}
+		},
+		  {
+			"name": "GAMEPLAY",
+			"filters": {
+				"areFiltersAttributes":true,
+				"data":
+				[
+			  {
+				"name": "POSITION",
+				"isEditable": false,
+				"componentType": "TOGGLE"
+			  },
+			  {
+				"name": "ROLE",
+				"isEditable": false,
+				"componentType": "TOGGLE"
+			  },
+			  {
+			  	"name": "PREFERRED_POSITION",
+			  	"isVisible": false
+			  },
+			  {
+				"name": "PLAYING_STYLE",
+				"isEditable": false,
+				"componentType": "TOGGLE"
+			  },
+			  {
+				"name": "PREFERRED_FOOT",
+				"isEditable": false,
+				"componentType": "TOGGLE"
+			  }
+			]
+			}
+		},
+		  {
+			"name": "TRAITS",
+			"filters": {
+				"areFiltersAttributes":true,
+				"data":
+				[
+			{
+			"name": "TRAITS"
+			}
+            ]
+			}
+			}
+		]
+		}
+	},
+	{
+		"name": "HEAD_AND_FACE",
+		"filters": {
+			"areFiltersAttributes": true,
+			"data": [
+			  {
+					"name": "HEAD"
+				},
+        {
+          "name": "TONE_AND_COMPLEXION"
+        },
+        {
+					"name": "EYE",
+					"numPresets": 23,
+					"numTweaks": 4,
+					"colourPickerAttribute": "EYE_COLOUR"
+				},
+				{
+					"name": "BROW",
+					"numPresets": 0,
+					"numTweaks": 4,
+					"colourPickerAttribute": "FACIAL_HAIR_COLOUR"
+				},
+        {
+          "name": "NOSE",
+          "numPresets": 28,
+          "numTweaks": 4
+        },
+        {
+					"name": "MOUTH",
+					"numPresets": 22,
+					"numTweaks": 4
+				},
+        {
+          "name": "CHEEK_JAW",
+          "numPresets": 13,
+          "numTweaks": 5
+        },
+        {
+					"name": "CHIN",
+					"numPresets": 9,
+					"numTweaks": 5
+				},
+				{
+					"name": "EAR",
+					"numPresets": 14,
+					"numTweaks": 5
+				},
+				{
+					"name": "HAIR",
+					"colourPickerAttribute": "HAIR_COLOUR"
+				},
+				{
+					"name": "FACIAL_HAIR",
+					"colourPickerAttribute": "FACIAL_HAIR_COLOUR"
+				}
+			]
+		}
+	},
+	{
+		"name": "KIT_FIT",
+		"filters": {
+			"areFiltersAttributes": false,
+			"data": [
+				{
+					"name": "BOOTS_AND_SOCKS",
+					"filters": {
+						"areFiltersAttributes": true,
+						"data": [
+							{
+								"name": "BOOT"
+							},
+							{
+								"name": "KIT_SOCK"
+							},
+							{
+								"name": "ANKLE_TAPE"
+							}
+						]
+					}
+				},
+				{
+					"name": "GLOVES_AND_WRIST",
+					"filters": {
+						"areFiltersAttributes": true,
+						"data": [
+							{
+								"name": "GLOVES"
+							},
+							{
+								"name": "GK_GLOVES",
+                "disabledOptions": [103, 104, 95, 96, 117, 118]
+							},
+							{
+								"name": "LEFT_WRIST"
+							},
+							{
+								"name": "RIGHT_WRIST"
+							}
+						]
+					}
+				},
+				{
+					"name": "KIT_FIT",
+					"filters": {
+						"areFiltersAttributes": true,
+						"data": [
+							{
+								"name": "WAIST_FIT"
+							},
+							{
+								"name": "KIT_SLEEVES"
+							},
+							{
+								"name": "GK_PANTS"
+							},
+							{
+								"name": "JERSEY_FIT"
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	{
+		"name": "BRAND_ANIMATIONS",
+		"filters": {
+			"areFiltersAttributes": false,
+			"data": [
+				{
+					"name": "CELEBRATIONS",
+					"filters": {
+						"areFiltersAttributes": true,
+						"data": [
+							{
+								"name": "GOALCELEBRATION",
+								"disabledOptions": [3610, 3612, 3616, 3617, 3620, 3623, 3624, 3628, 3609, 3611, 3615, 3618, 3619, 3621, 3622, 3625, 3626, 3627]
+							}
+						]
+					}
+				},
+        {
+					"name": "STYLE",
+					"filters": {
+						"areFiltersAttributes": true,
+						"data": [
+							{
+								"name": "FREEKICKSTYLE"
+							},
+							{
+								"name": "PENALTYKICKSTYLE"
+							}
+						]
+					}
+				},
+        {
+          "name": "RUNNINGSTYLE",
+          "filters": {
+            "areFiltersAttributes": true,
+            "data": [
+              {
+                "name": "RUNNINGSTYLE"
+              }
+            ]
+          }
+		    }
+			]
+		}
+	}
+    ],
+    "attributeDependencyTree":
+    [
+	{
+		"parents": [
+			"ROLE"
+		],
+		"children": [
+			"PREFERRED_POSITION"
+		]
+	},
+	{
+		"parents":
+		[
+		  "POSITION"
+		],
+		"children":
+		[
+		  "GK_GLOVES",
+		  "GK_PANTS",
+		  "GLOVES",
+		  "ROLE"
+		]
+	},
+	{
+		"parents":
+		[
+		  "FACE"
+		],
+		"children":
+		[
+		  "HEAD"
+		]
+	},
+	{
+		"parents":
+		[
+		  "GK_PANTS"
+		]
+		,"children":
+		[
+		  "ANKLE_TAPE"
+		]
+	},
+	{
+		"parents":
+		[
+		  "HEAD"
+		],
+		"children":
+		[
+		  "CHIN",
+		  "EAR",
+		  "EYE",
+		  "CHEEK_JAW",
+		  "MOUTH",
+		  "NOSE",
+		  "BROW"
+		]
+	}
+    ]
+}

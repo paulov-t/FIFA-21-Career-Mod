@@ -1,0 +1,234 @@
+{
+	"presetType": "CP_PRESET_11_V_11",
+	"attributeCategories": [
+		{
+			"name": "INFO",
+			"filters": {
+				"areFiltersAttributes": false,
+				"data": [
+					{
+						"name": "ABOUT_ME",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "FIRST_NAME",
+									"isEditable": false,
+									"componentType": "INPUT_TEXT"
+								},
+								{
+									"name": "SURNAME",
+									"isEditable": false,
+									"componentType": "INPUT_TEXT"
+								},
+								{
+									"name": "KNOWN_AS",
+									"isEditable": false,
+									"componentType": "INPUT_TEXT"
+								},
+								{
+									"name": "COMMENTARY_NAME",
+									"isEditable": false,
+									"componentType": "LIST"
+								},
+								{
+									"name": "KIT_NAME",
+									"isEditable": false,
+									"componentType": "INPUT_TEXT"
+								},
+								{
+									"name": "KIT_NUMBER",
+									"isEditable": false,
+									"minValue": 1,
+									"maxValue": 99,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "NATIONALITY",
+									"isEditable": false,
+									"componentType": "LIST"
+								},
+								{
+									"name": "TEAM",
+									"isEditable": false,
+									"componentType": "TOGGLE",
+									"dataType": "INT",
+									"dataPolicyType": "OPTIONS"
+								},
+								{
+									"name": "BIRTH_YEAR",
+									"isEditable": false,
+									"minValue": 1970,
+									"maxValue": 2002,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "BIRTH_MONTH",
+									"isEditable": false,
+									"minValue": 1,
+									"maxValue": 12,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "BIRTH_DAY",
+									"isEditable": false,
+									"minValue": 1,
+									"maxValue": 31,
+									"componentType": "TOGGLE"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "KIT_FIT",
+			"filters": {
+				"areFiltersAttributes": false,
+				"data": [
+					{
+						"name": "KIT_FIT",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "WAIST_FIT"
+								},
+								{
+									"name": "KIT_SLEEVES"
+								},
+								{
+									"name": "GK_PANTS"
+								},
+								{
+									"name": "JERSEY_FIT"
+								}
+							]
+						}
+					},
+          {
+						"name": "BOOTS_AND_SOCKS",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "BOOT"
+								},
+								{
+									"name": "KIT_SOCK"
+								},
+								{
+									"name": "ANKLE_TAPE"
+								}
+							]
+						}
+					},
+					{
+						"name": "GLOVES_AND_WRIST",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "GLOVES"
+								},
+								{
+                  "name": "GK_GLOVES",
+                  "disabledOptions": [103, 104, 95, 96, 117, 118]
+								},
+								{
+									"name": "LEFT_WRIST"
+								},
+								{
+									"name": "RIGHT_WRIST"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "ATHLETIC",
+			"filters": {
+				"areFiltersAttributes": false,
+				"data": [
+					{
+						"name": "BODY",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "HEIGHT",
+									"isEditable": false,
+									"minValue": 152,
+									"maxValue": 205,
+									"componentType": "SLIDER"
+								},
+								{
+									"name": "WEIGHT",
+									"isEditable": false,
+									"minValue": 45,
+									"maxValue": 115,
+									"componentType": "SLIDER"
+								}
+							]
+						}
+					},
+					{
+						"name": "GAMEPLAY",
+						"filters": {
+							"areFiltersAttributes": true,
+							"data": [
+								{
+									"name": "POSITION",
+									"isEditable": false,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "ROLE",
+									"isEditable": false,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "PLAYING_STYLE",
+									"isEditable": false,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "PREFERRED_FOOT",
+									"isEditable": false,
+									"componentType": "TOGGLE"
+								},
+								{
+									"name": "PREFERRED_POSITION",
+									"isVisible": false
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	],
+	"attributeDependencyTree": [
+		{
+			"parents": [
+				"POSITION"
+			],
+			"children": [
+				"GK_GLOVES",
+				"GK_PANTS",
+				"GLOVES"
+			]
+		},
+		{
+			"parents": [
+				"GK_PANTS"
+			],
+			"children": [
+				"ANKLE_TAPE"
+			]
+		}
+	]
+}
