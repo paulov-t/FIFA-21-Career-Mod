@@ -45,7 +45,8 @@
 
 ## Youth System
 - You will have 16 players in your youth team to start a Career
-- Generated Youth players rating are much more appropriate to the level and you will now longer be able to build a super Youth Team in the 1st season
+- Generated Youth players rating are much more appropriate to the level and you will no longer be able to build a super Youth Team in the 1st season
+- Generated top rated and high potential players are much more rare
 
 ## Career Hub
 - The Main UI of the Career Mode now has Kit Numbers and Injury list in the Squad Tab

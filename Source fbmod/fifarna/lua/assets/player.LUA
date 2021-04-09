@@ -18,10 +18,6 @@ local v2k4Debug = { }
 local v2k4debugfile = io.open("v2k4debugfile.txt", "w")
 v2k4debugfile:write('initialisation\n')
 
-local use_mpr_face_system = 0
-local use_mpr_boot_system = 0
-local use_mpr_tattoo_system = 0
-local use_ufm_face_system = 0
 local use_other_face_system = 0
 
 -------------------------
@@ -443,8 +439,89 @@ function doPlayerInjection(dir, player)
 end
 
 
+function doPlayerFaceMod(player, fileLoc, debugFileLoc) 
+
+	local debuggingfile = io.open(debugFileLoc, "w")
+
+	if(file_exists(fileLoc)) then
+		debuggingfile:write('Using ' .. fileLoc .. '\n')
+		
+		for k,v in pairs(lines_from(fileLoc)) do
+			local r = split(v, '=')
+			local varName = ""
+			local varValue = ""
+			for key, value in pairs(r) do
+				
+				
+				if (varName == "") then
+					varName = value
+				
+				else
+					varValue = value
+					
+						
+					if(tonumber(player.PlayerId) == tonumber(varName)) then 
+						
+						player.HeadClass = 0
+						player.Head = tonumber(varValue)
+						player.HeadAssetId = tonumber(varValue)
+						player.PlayerAssetId = tonumber(varValue)
+						player.Hair = tonumber(varValue)						
+						player.FaceType = tonumber(varValue)
+												
+						debuggingfile:write('Face ' .. varName .. ' has been set to ' .. varValue .. '\n')
+						
+					end
+					
+					-- Set Old Player Id
+					if(tonumber(player.PlayerId) == tonumber(varValue)) then 
+						
+						player.HeadClass = 1
+						player.Head = 0
+						player.HeadAssetId = 0
+						player.PlayerAssetId = 0
+						player.Hair = 65		
+						--player.Hair = math.random(65)
+
+						--local hairColor = player.HairColor
+						--hairColorPri = PLAYER_COLOR_PRI_LIST[1]
+						--hairColorSec = PLAYER_COLOR_SEC_LIST[1]
+						--hairColorTer = PLAYER_COLOR_TER_LIST[1]
+
+						--player.HairColor = 1
+						--player.HairColorPri = hairColorPri
+						--player.HairColorSec = hairColorSec
+						--player.HairColorTer = hairColorTer
+						player.HairColor = 0x00000000;
+						player.HairColorPri = 0x00000000;
+						player.HairColorSec = 0x00000000;
+						player.HairColorTer = 0x00000000;
+						player.FacialHairColor=0x00000000;
+		
+		
+						player.FaceType = 1
+												
+						debuggingfile:write('Face ' .. varValue .. ' has been set to basic model\n')
+						
+					end
+					
+				end
+				
+			end
+		end
+		
+	end
+	
+	debuggingfile:close()
+	return true;
+end
 
 
+function doOtherFaceSystem(player)
+
+	local status, retval = pcall(doPlayerFaceMod,player,'OtherFaces.txt','v2k4debugfile_Other.txt');
+
+end
 
 local function _updateAccessory(accessory)
     -- Calculation below is to minimize the amount of textures loaded for accessories. Forces the sharing of 1 colormap for left/right meshes.
@@ -693,8 +770,15 @@ function PlayerUpdate()
 		player.SeasonalJersey = 532021
 	end
 	
-	
+	local UseSystem = getVariableFromFile("v2k4settings.txt", "UseSystem")
 	local ForceLongSleeves = getVariableFromFile("v2k4settings.txt", "ForceLongSleeves")
+	
+	if(UseSystem == "1") then
+		local UseFaceOtherSystem = getVariableFromFile("v2k4settings.txt", "UseFaceOtherSystem")
+		if(UseFaceOtherSystem == "1") then
+			doOtherFaceSystem(player)
+		end
+	end
 	
 	if(ForceLongSleeves == "1") then
 		-- For insurance to check file has run

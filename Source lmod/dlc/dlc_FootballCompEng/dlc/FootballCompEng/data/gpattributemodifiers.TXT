@@ -4,7 +4,7 @@
        0,    0,    0,   0,   0,   0,   0,    0,    0,    0,   0,   0,  0,   0,   0,   0,    0,   0,   0,    0,   0,       0,       0,     0,     0,   0,   0,   0,  0,   0,   0,   0,   0
 // FORM - uses the difference between the base of 6.4 and the player's form, so in reality these numbers below will only be halved 
 // accel, sprt, agil, bal, jmp, stm, str, rctn, aggr, t.aw, pos, vis, bc, crs, drb, fin, FKac, hac, lps, spss, mrk, shotpow, pwshtac, sttkl, sltkl, vol, crv, pen gkd, gkh, gkk, gkr, gkp,
-       0,    0,    0,   0,   0,   0,   0,    4,    0,     4,  4,   0,  4,   4,   0,  4,    0,   4,    0,   4,    4,       0,      0,    0,      0,    0,   0,   0,  0,  0,    0,    0,  0
+       0,    0,    0,   0,   0,   0,   0,    3,    0,     3,  3,   0,  3,   3,   0,  3,    0,   3,    0,   3,    3,       0,      0,    0,      0,    0,   0,   0,  0,  0,    0,    0,  0
 // TEAM_INSPIRED - talk to press used on the entire team 
 // accel, sprt, agil, bal, jmp, stm, str, rctn, aggr, t.aw, pos, vis, bc, crs, drb, fin, FKac, hac, lps, spss, mrk, shotpow, pwshtac, sttkl, sltkl, vol, crv, pen gkd, gkh, gkk, gkr, gkp,
        0,    0,    0,   0,   0,   0,   0,    0,    0,    0,   0,   0,  0,   0,   0,   0,    0,   0,   0,    0,   0,       0,       0,     0,     0,   0,   0,   0,   0,   0,   0,   0,  0
