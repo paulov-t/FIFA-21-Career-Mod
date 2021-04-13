@@ -29,11 +29,12 @@
 - Searching for players now reveals attributes much faster
 - GTN and Scouting find players much more suited to your team. No longer will an English League 2 team find Sergio Aguero in their scout list!
 
-## Player Values (WORK IN PROGRESS)
+## Player Values
 - Player Potential (young players who future stars are expensive)
-- Player Values have been adjusted to be more like transkermarkt.com
+- Player Values for top players have been adjusted to be more like transkermarkt.com
+- Player values for low players, like English League 2, have been adjusted to be more like Football Manager 2021
 
-## Player Growth (WORK IN PROGRESS)
+## Player Growth
 - Dynamic Potential is not used as much and not as high
 - Growth curve completely rewritten so all players do not overgrow and degrade slowly
 - Player attribute growth affects all attributes for all players
