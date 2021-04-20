@@ -10,6 +10,13 @@
 		- This in turn, helps the AI Transfer Market become more realistic
 - Currency Conversion
 	- Currency conversions based on 19th March 2021 rate. GBP to EUR = 1.17, GBP to USD = 1.39 (This is updated with each patch)
+- Significantly reduced money earned from Season Tickets. The reason behind this is that there is no option for me to reduce how much the board gives you from this, which means you obtain around 50-60% of the income into your transfer budget. This breaks the starting budget I give the user within 4 weeks of the start of the season. So the only option is reduce the amount "earned".
+- Reduced Stadium Maintenance for larger stadiums which was making teams paying far too much.
+- Reduced starting budget for many top teams to reflect what was spent by these teams after the first window of 2020/2021 season. I based this off transfermarkt.com. An example is Liverpool only spent around 50m after selling their own players. 
+- Significantly reduced money you get back from selling a player. This is determined by the team's "profitability" rating. This is much more like Football Manager now, where the board is very likely to take a significant chunk of your earnings. Please be very careful when selling players.
+- Significantly reduced money you receive when going into the next season. You start with around same money as the first, it is unrealistic for you to get another 100m boost on top of that from season 2 onwards.
+- Reduced money earned from Shirt Sales
+- Slightly increased money earned from Match Tickets
 
 ## Transfers
 - Loans 
