@@ -123,6 +123,7 @@ function getVariableFromFile(file, variableToGet)
 		
 			local r = split(v, '=')
 			
+			
 			local varName = ""
 			local varValue = ""
 			for key, value in pairs(r) do
@@ -461,6 +462,7 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 					
 						
 					if(tonumber(player.PlayerId) == tonumber(varName)) then 
+						
 						
 						player.HeadClass = 0
 						player.Head = tonumber(varValue)
