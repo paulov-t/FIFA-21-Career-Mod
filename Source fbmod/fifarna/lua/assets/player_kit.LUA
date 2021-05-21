@@ -1,13 +1,8 @@
 --------------------------------------------------
-local v2k4Debug = { }
-local v2k4debugfile = io.open("v2k4debugfile.txt", "w")
-v2k4debugfile:write('initialisation player_kit.LUA\n')
---local UseNextGenStrandHair = getVariableFromFile("v2k4settings.txt", "UseNextGenStrandHair")
---------------------------------------------------
 SETTING_Generation = 4
 SETTING_UseFlexMaps = false
 SETTING_DecalsUseExtraMaps = false
-SETTING_EnableStrandHair = true
+SETTING_EnableStrandHair = false
 -------------------------------------------------
 
 setGlobalEnum("ShaderDrawOrder")
@@ -2559,7 +2554,7 @@ function loadPlayerKit(initData)
 
 	-- hair
 	-- if there is strand hair then load both, disable stranhair for team sheet overlay
-	local enableStrandHair = SETTING_EnableStrandHair and initData.DisableCloth == 0
+	local enableStrandHair = true--SETTING_EnableStrandHair and initData.DisableCloth == 0
 	if enableStrandHair then
 		loadStrandHair(items, initData)
 		loadHair(items, initData)

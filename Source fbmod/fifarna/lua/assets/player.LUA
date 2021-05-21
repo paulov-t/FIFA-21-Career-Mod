@@ -439,8 +439,134 @@ function doPlayerInjection(dir, player)
 	end
 end
 
+RevertOldFaces = "1"
 
 function doPlayerFaceMod(player, fileLoc, debugFileLoc) 
+
+	local debuggingfile = io.open(debugFileLoc, "w")
+	
+	debuggingfile:write('doPlayerFaceMod(player,' .. fileLoc .. ',' .. debugFileLoc .. ')\n')
+
+	if(file_exists(fileLoc)) then
+		debuggingfile:write('Found ' .. fileLoc .. '\n')
+		
+		for k,v in pairs(lines_from(fileLoc)) do
+		
+		
+		
+			if string.find(v, "/") == nil then
+			
+				debuggingfile:write(v .. '\n')
+				
+				local r = split(v, '=')
+				local varName = ""
+				local varValue = ""
+				local isBracketed = false
+				for key, value in pairs(r) do
+										
+								
+					--debuggingfile:write('value=' .. value .. '\n')						
+					
+					if (varName == "") then
+						
+						varName = value
+						
+						--debuggingfile:write('varname=' .. varName .. '\n')
+						
+											
+					
+					else
+						varValue = value
+						--debuggingfile:write('varvalue=' .. varValue .. '\n')
+						
+												
+						if string.find(varName, "loadFile")  ~= nil then
+			
+							debuggingfile:write('loadFile ' .. varValue .. '\n')
+							doPlayerFaceMod(player, varValue, debugFileLoc)
+						
+						else 
+													
+							if(tonumber(player.PlayerId) == tonumber(varName)) then 
+								
+								
+								player.HeadClass = 0
+								player.Head = tonumber(varValue)
+								player.HeadAssetId = tonumber(varValue)
+								player.PlayerAssetId = tonumber(varValue)
+								player.Hair = tonumber(varValue)						
+								player.FaceType = tonumber(varValue)
+								player.HeadVariation = 0
+								player.Eyebrow = 0
+								player.FaceSideBurn = 0
+								player.FacialHairColor = 0
+								player.FacialHairType = 0
+								player.HeadSkinType = 0
+								player.HeadSkinToneType = 0
+								player.HairColor = 0
+								player.UseFaceTextureComposition = 0
+														
+								debuggingfile:write('Face ' .. varName .. ' has been set to ' .. varValue .. '\n')
+								
+							end
+							
+							if(RevertOldFaces == "1") then 
+													
+								-- Set Old Player Id
+								if(tonumber(player.PlayerId) == tonumber(varValue)) then 
+									
+									player.HeadClass = 1
+									player.Head = 0
+									--player.HeadAssetId = 0
+									player.HeadAssetId = player.PlayerId
+									player.PlayerAssetId = 0
+									--player.Hair = math.random(10,165)	
+
+									player.Hair = 126			
+									player.HeadVariation = 0									
+									
+									player.HairColor = 0x00534238;
+									player.HairColorPri = 0x00534238;
+									player.HairColorSec = 0x0045332B;
+									player.HairColorTer = 0x0017110E;
+									--player.FacialHairColor=0x00000000;
+					
+									player.FaceType = 0
+									if(player.Gender == 1) then 
+										player.Head = 9000
+									end
+															
+									debuggingfile:write('Face ' .. varValue .. ' has been set to basic model\n')
+									debuggingfile:flush()
+								end
+								
+							end
+							
+						end
+						
+					end
+					
+				end
+			end
+		end
+		
+	end
+	
+	debuggingfile:close()
+	return true;
+end
+
+
+local function doOtherFaceSystem(player)
+
+	-- Old System
+	local status, retval = pcall(doPlayerFaceMod,player,'OtherFaces.txt','v2k4debugfile_Other.txt')
+	-- Setup ready to change filename
+	--local status, retval = pcall(doPlayerFaceMod,player,'v2k4Faces.txt','v2k4debugfile_Other.txt')
+
+end
+
+local function doKitMod(player, fileLoc, debugFileLoc) 
 
 	local debuggingfile = io.open(debugFileLoc, "w")
 
@@ -448,6 +574,10 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 		debuggingfile:write('Using ' .. fileLoc .. '\n')
 		
 		for k,v in pairs(lines_from(fileLoc)) do
+			
+			
+			
+		
 			local r = split(v, '=')
 			local varName = ""
 			local varValue = ""
@@ -460,50 +590,11 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 				else
 					varValue = value
 					
-						
-					if(tonumber(player.PlayerId) == tonumber(varName)) then 
-						
-						
-						player.HeadClass = 0
-						player.Head = tonumber(varValue)
-						player.HeadAssetId = tonumber(varValue)
-						player.PlayerAssetId = tonumber(varValue)
-						player.Hair = tonumber(varValue)						
-						player.FaceType = tonumber(varValue)
+					if(tonumber(player.Kit) == tonumber(varName)) then 
 												
-						debuggingfile:write('Face ' .. varName .. ' has been set to ' .. varValue .. '\n')
-						
-					end
-					
-					-- Set Old Player Id
-					if(tonumber(player.PlayerId) == tonumber(varValue)) then 
-						
-						player.HeadClass = 1
-						player.Head = 0
-						player.HeadAssetId = 0
-						player.PlayerAssetId = 0
-						player.Hair = 65		
-						--player.Hair = math.random(65)
-
-						--local hairColor = player.HairColor
-						--hairColorPri = PLAYER_COLOR_PRI_LIST[1]
-						--hairColorSec = PLAYER_COLOR_SEC_LIST[1]
-						--hairColorTer = PLAYER_COLOR_TER_LIST[1]
-
-						--player.HairColor = 1
-						--player.HairColorPri = hairColorPri
-						--player.HairColorSec = hairColorSec
-						--player.HairColorTer = hairColorTer
-						player.HairColor = 0x00000000;
-						player.HairColorPri = 0x00000000;
-						player.HairColorSec = 0x00000000;
-						player.HairColorTer = 0x00000000;
-						player.FacialHairColor=0x00000000;
-		
-		
-						player.FaceType = 1
-												
-						debuggingfile:write('Face ' .. varValue .. ' has been set to basic model\n')
+						player.Kit = tonumber(varValue)
+																		
+						debuggingfile:write('Kit ' .. varName .. ' has been set to ' .. varValue .. '\n')
 						
 					end
 					
@@ -516,12 +607,12 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 	
 	debuggingfile:close()
 	return true;
+
 end
 
+local function doKitSystem(player) 
 
-function doOtherFaceSystem(player)
-
-	local status, retval = pcall(doPlayerFaceMod,player,'OtherFaces.txt','v2k4debugfile_Other.txt');
+	local status, retval = pcall(doKitMod,player,'v2k4Kits.txt','v2k4debugfile_Other.txt')
 
 end
 
@@ -780,6 +871,19 @@ function PlayerUpdate()
 		if(UseFaceOtherSystem == "1") then
 			doOtherFaceSystem(player)
 		end
+		
+		local UseKitSystem = getVariableFromFile("v2k4settings.txt", "UseKitSystem")
+		if(UseKitSystem == "1") then
+			doKitSystem(player)
+		end
+		
+		--local UseDynamicSystem = getVariableFromFile("v2k4settings.txt", "UseDynamicSystem")
+		--if(UseDynamicSystem == "1") then
+		--	doKitSystem(player)
+		--end
+		
+		RevertOldFaces = getVariableFromFile("v2k4settings.txt", "RevertOldFaces")
+		
 	end
 	
 	if(ForceLongSleeves == "1") then
