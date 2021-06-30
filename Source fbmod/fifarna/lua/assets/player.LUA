@@ -515,11 +515,12 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 								-- Set Old Player Id
 								if(tonumber(player.PlayerId) == tonumber(varValue)) then 
 									
-									player.HeadClass = 1
-									player.Head = 0
+									player.HeadClass = 0
+									player.Head = player.PlayerId
 									--player.HeadAssetId = 0
 									player.HeadAssetId = player.PlayerId
-									player.PlayerAssetId = 0
+									--player.PlayerAssetId = 0
+									player.PlayerAssetId = player.PlayerId
 									--player.Hair = math.random(10,165)	
 
 									player.Hair = 126			
@@ -531,7 +532,7 @@ function doPlayerFaceMod(player, fileLoc, debugFileLoc)
 									player.HairColorTer = 0x0017110E;
 									--player.FacialHairColor=0x00000000;
 					
-									player.FaceType = 0
+									--player.FaceType = 0
 									if(player.Gender == 1) then 
 										player.Head = 9000
 									end

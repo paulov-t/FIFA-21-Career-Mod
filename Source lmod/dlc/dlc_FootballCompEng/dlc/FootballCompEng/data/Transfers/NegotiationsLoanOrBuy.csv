@@ -1,12 +1,12 @@
 Release Clause Score,35,,,,,,,,,,
 Another Club Accepted,-175,,,,,,,,,,
 Another Club Pending,-100,,,,,,,,,,
-Free Agent Points,95,,,,,,,,,,
-Is Transfer Listed,125,,,,,,,,,,
-Is Loan Listed,165,,,,,,,,,,
+Free Agent Points,100,,,,,,,,,,
+Is Transfer Listed,130,,,,,,,,,,
+Is Loan Listed,166,,,,,,,,,,
 Stay In Country Points,25,,,,,,,,,,
 minLOBscore for Transfer,175,,,,,,,,,,
-minLOBscore for Loan,165,,,,,,,,,,
+minLOBscore for Loan,166,,,,,,,,,,
 User Buyer Preferred Position Score,0,,,,,,,,,,
 ,,,,,,,,,,,
 Team Level Star Rank(0 based index),,,,,,,,,,,
@@ -38,30 +38,30 @@ Africa,//Cameroon;Ivory;Coast;Egypt,103,108,111,,,,,,,
 Oceania,//Australia;New;Zealand,195,198,,,,,,,,
 ,,,,,,,,,,,
 Nationality FromGroup\ToGroup,British Isles,Latin Europe,Western Europe,Nothern Europe,Southern Europe,Eastern Europe,North America,South America,Asia,Africa,Oceania
-British Isles,51,-205,-210,-210,-210,-210,-210,-210,-210,-210,-210
-Latin Europe,-10,47,-95,-400,-95,-95,-185,-185,-185,-185,-185
-Western Europe,-50,-100,45,-95,-95,-95,-185,-185,-185,-185,-185
-Nothern Europe,-50,-125,-95,45,-95,-95,-185,-185,-185,-185,-185
-Southern Europe,-60,-125,-95,-95,45,45,-185,-185,-185,-185,-185
-Eastern Europe,-55,-125,-95,-95,45,45,-185,-185,-185,-185,-185
-North America,-50,-125,-95,-95,-95,-95,45,60,-250,-500,60
-South America,-10,0,-95,-95,-50,-10,45,60,-50,-500,-250
-Asia,-50,-125,-95,-95,-95,-95,-185,-185,-185,-185,-185
-Africa,-35,-125,-95,-95,-95,-95,-185,-185,-185,-185,-185
-Oceania,-45,-125,-95,-95,-95,-95,-185,-185,45,-185,70
+British Isles,51,-215,-220,-220,-220,-220,-220,-220,-220,-220,-220
+Latin Europe,-16,47,-50,-400,-95,-95,-220,-220,-220,-220,-220
+Western Europe,-39,-50,47,-95,-95,-95,-220,-220,-220,-220,-220
+Nothern Europe,-39,-50,-60,45,-95,-95,-220,-220,-220,-220,-220
+Southern Europe,-49,-60,-60,-60,45,45,-220,-220,-220,-220,-220
+Eastern Europe,-44,-55,-60,-60,45,45,-220,-220,-220,-220,-220
+North America,-39,-50,-60,-60,-95,-95,45,60,-250,-500,60
+South America,-15,25,10,-60,-50,-10,45,60,-50,-500,-250
+Asia,-39,-50,-60,-60,-95,-95,-220,-220,-220,-220,-220
+Africa,25,25,25,25,25,25,-220,-220,-220,-220,-220
+Oceania,-44,-45,-60,-60,-95,-95,-220,-220,45,-220,70
 ,,,,,,,,,,,
 Team Overall >=,Score,,,,,,,,,,
-85,108,,,,,,,,,,
-84,103,,,,,,,,,,
+85,111,,,,,,,,,,
+84,106,,,,,,,,,,
 82,92,,,,,,,,,,
-79,61,,,,,,,,,,
-74,59,,,,,,,,,,
-1,57,,,,,,,,,,
+79,62,,,,,,,,,,
+74,60,,,,,,,,,,
+1,58,,,,,,,,,,
 ,,,,,,,,,,,
 League Rank,Score,,,,,,,,,,
-0,8,,,,,,,,,,
-1,5,,,,,,,,,,
-2,5,,,,,,,,,,
+0,5,,,,,,,,,,
+1,0,,,,,,,,,,
+2,0,,,,,,,,,,
 3,0,,,,,,,,,,
 4,0,,,,,,,,,,
 ,,,,,,,,,,,
@@ -102,7 +102,7 @@ Role Difference(Buyer-Seller),Score,"Do not leave gaps, i.e. you can not enter o
 -2,0,,,,,,,,,,
 ,,,,,,,,,,,
 Player Overall >=, League Overall >=,,,,,,,,,,
-86,76,,,,,,,,,,
+84,76,,,,,,,,,,
 68,67,,,,,,,,,,
 65,62,,,,,,,,,,
 60,57,,,,,,,,,,
@@ -111,8 +111,8 @@ Player Overall >=, League Overall >=,,,,,,,,,,
 ,,,,,,,,,,,
 Preferred Position Available,Score,Comment,,,,,,,,,
 0,-1000,Fallback Case,,,,,,,,,
-1,45,Player first preferred position found,,,,,,,,,
-2,20,,,,,,,,,,
+1,40,Player first preferred position found,,,,,,,,,
+2,15,,,,,,,,,,
 3,0,,,,,,,,,,
 4,0,,,,,,,,,,
 ,,,,,,,,,,,
