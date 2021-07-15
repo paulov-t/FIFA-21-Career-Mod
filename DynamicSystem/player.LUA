@@ -15,11 +15,20 @@ local FACIALHAIRCOLOR_REMAP = {1, 0, 3, 6, 7}
 -------------------------
 ----- PAULS HELPERS -----
 
+local DebugFileLocation = 'DynamicSystem\\v2k4debugfile_player.txt'
+
 function logToDebugFile(txt)
+
+if(file_exists(DebugFileLocation) == false) then
+
+local debugFile = io.open(DebugFileLocation, 'w')
+			debugFile:close()
+
+end
 	
-	if(file_exists('v2k4debugfile_player.txt')) then 
+	if(file_exists(DebugFileLocation)) then 
 		-- Open the file in r mode (don't modify file, just read)
-		local out = io.open('v2k4debugfile_player.txt', 'r')
+		local out = io.open(DebugFileLocation, 'r')
 
 		local lines = {}
 		for line in out:lines() do
@@ -43,10 +52,10 @@ function logToDebugFile(txt)
 		-- At this point, we should have successfully written the data to the temporary file
 
 		-- Delete the old file
-		os.remove('v2k4debugfile_player.txt')
+		os.remove(DebugFileLocation)
 
 		-- Rename the new file
-		os.rename('v2k4debugfile_player.file.tmp.txt', 'v2k4debugfile_player.txt')
+		os.rename('v2k4debugfile_player.file.tmp.txt', DebugFileLocation)
 	end
 
 end
@@ -609,15 +618,16 @@ end
 local function doOtherFaceSystem(player)
 
 	-- Old System
-	local status, retval = pcall(doPlayerFaceMod,player,'OtherFaces.txt','v2k4debugfile_Other.txt')
+	doPlayerFaceMod(player,'OtherFaces.txt','v2k4debugfile_Other.txt')
 	-- Setup ready to change filename
-	--local status, retval = pcall(doPlayerFaceMod,player,'v2k4Faces.txt','v2k4debugfile_Other.txt')
+	doPlayerFaceMod(player,'DynamicSystem\\Players\\Faces.txt','v2k4debugfile_Other.txt')
 
 	-- loading via player file
 	local playerFile = "DynamicSystem\\Players\\" .. tostring(player.PlayerId) .. ".txt"
 	
 	if(file_exists(playerFile)) then
 		local newFace = getVariableFromFile2(playerFile, "Face", player.Head)
+		local newBeard = getVariableFromFile2(playerFile, "Beard", player.FacialHairType)
 
 		player.HeadClass = 0
 		player.Head = tonumber(newFace)
@@ -629,7 +639,7 @@ local function doOtherFaceSystem(player)
 		player.Eyebrow = 0
 		player.FaceSideBurn = 0
 		player.FacialHairColor = 0
-		player.FacialHairType = 0
+		player.FacialHairType = newBeard
 		player.HeadSkinType = 0
 		player.HeadSkinToneType = 0
 		player.HairColor = 0
@@ -639,55 +649,80 @@ local function doOtherFaceSystem(player)
 
 end
 
-local function doKitMod(player, fileLoc, debugFileLoc) 
+local function doKitMod(player, fileLoc, variableToGet) 
 
-	local debuggingfile = io.open(debugFileLoc, "w")
 
-	if(file_exists(fileLoc)) then
-		debuggingfile:write('Using ' .. fileLoc .. '\n')
+	logToDebugFile("player.lua::doKitMod:(" .. fileLoc .. "," .. variableToGet .. ")")
+	
+	
+	if(file_exists(fileLoc)) then 
+	
+		logToDebugFile("player.lua::doKitMod:(" .. fileLoc .. "," .. variableToGet .. ")" .. ":found")
+	
+		local originalKit = player.Kit
+		player.Kit = getVariableFromFile2(fileLoc, variableToGet, player.Kit)
+		player.KitType = getVariableFromFile2(fileLoc, "KitType", player.KitType)
 		
-		for k,v in pairs(lines_from(fileLoc)) do
-			
-			
-			
+		if(originalKit ~= player.Kit) then
+			logToDebugFile("player.lua::doKitMod:NewKit=" .. player.Kit)
 		
-			local r = split(v, '=')
-			local varName = ""
-			local varValue = ""
-			for key, value in pairs(r) do
-				
-				
-				if (varName == "") then
-					varName = value
-				
-				else
-					varValue = value
-					
-					if(tonumber(player.Kit) == tonumber(varName)) then 
-												
-						player.Kit = tonumber(varValue)
-																		
-						debuggingfile:write('Kit ' .. varName .. ' has been set to ' .. varValue .. '\n')
-						
-					end
-					
-				end
-				
-			end
 		end
+	
 		
+		return true
 	end
 	
-	debuggingfile:close()
-	return true;
+	
+	return false
 
 end
 
 local function doKitSystem(player) 
-
-	local status, retval = pcall(doKitMod,player,'v2k4Kits.txt','v2k4debugfile_Other.txt')
-
+	doKitMod(player, 'v2k4Kits.txt', player.Kit)
+	doKitMod(player, 'DynamicSystem\\Kits.txt', player.Kit)
+	doKitMod(player, getKitFileLocation(player), "ReplacementKit")
 end
+
+
+local function kitSystemEnabled() 
+
+	local result = "0"
+	if(file_exists("v2k4Settings.txt")) then
+	
+		result = getVariableFromFile2("v2k4Settings.txt", "UseKitSystem", result)
+	
+	end
+		
+	if(file_exists("DynamicSystem\\Settings.txt")) then
+	
+		result = getVariableFromFile2("DynamicSystem\\Settings.txt", "UseKitSystem", result)
+	
+	end
+
+
+	return result == "1"
+end
+
+local function faceSystemEnabled() 
+
+	local result = "1"
+	if(file_exists("v2k4Settings.txt")) then
+	
+		result = getVariableFromFile2("v2k4Settings.txt", "UseFaceOtherSystem", result)
+	
+	end
+		
+	if(file_exists("DynamicSystem\\Settings.txt")) then
+	
+		result = getVariableFromFile2("DynamicSystem\\Settings.txt", "UseFaceOtherSystem", result)
+	
+	end
+
+
+	return result == "1"
+end
+
+
 
 local function _updateAccessory(accessory)
     -- Calculation below is to minimize the amount of textures loaded for accessories. Forces the sharing of 1 colormap for left/right meshes.
@@ -721,11 +756,42 @@ local function _updateAccessory(accessory)
 	end
 end
 
+local function DoGenericBootReplacement(id,boot)
+	local bootarray = {69,185,71,176,178,28,170,72,181,171,183,184,182,180,157,240,173,158,136,175,70,179,148,20,135,27,161,174,57,172}
+	local rboot = (id % #bootarray)+1
+	return bootarray[rboot]
+end
 
+local function getKitFileLocation(initData) 
+
+	local kitFile = "DynamicSystem\\Teams\\" .. tostring(initData.TeamId) .. "\\Kit_" .. tostring(initData.KitType) .. ".txt"
+	return kitFile
+	
+end
+
+local function kitFileExists(initData) 
+
+	local result = file_exists(getKitFileLocation(initData))
+	if(file_exists == false) then
+	
+	logToDebugFile(getKitFileLocation(initData) .. " doesnt exist!")
+	
+	end
+	
+	
+	return result
+	
+end
 
 function PlayerUpdate()
 	
 	local player = db.player
+	
+	local kitFile = getKitFileLocation(player)
+	if(kitFileExists(player)) then
+		player.JerseyFit = getVariableFromFile2(kitFile, "JerseyFit", player.JerseyFit)
+		player.JerseyCollarType = getVariableFromFile2(kitFile, "JerseyCollarType", player.JerseyCollarType)
+	end
 	
 	local DebugMode = getVariableFromFile("v2k4settings.txt", "DebugMode")
 	
@@ -940,35 +1006,23 @@ function PlayerUpdate()
 	
 	local UseSystem = getVariableFromFile("v2k4settings.txt", "UseSystem")
 	local ForceLongSleeves = getVariableFromFile("v2k4settings.txt", "ForceLongSleeves")
+	local UseGenericBootReplacement = 0
 	
 	if(UseSystem == "1") then
-		local UseFaceOtherSystem = getVariableFromFile("v2k4settings.txt", "UseFaceOtherSystem")
-		if(UseFaceOtherSystem == "1") then
+		if(faceSystemEnabled()) then
 			doOtherFaceSystem(player)
 		end
 		
-		local UseKitSystem = getVariableFromFile("v2k4settings.txt", "UseKitSystem")
-		if(UseKitSystem == "1") then
-			doKitSystem(player)
+		if(kitSystemEnabled()) then
+			doKitSystem(player)			
 		end
 		
-		--local UseDynamicSystem = getVariableFromFile("v2k4settings.txt", "UseDynamicSystem")
-		--if(UseDynamicSystem == "1") then
-		--	doKitSystem(player)
-		--end
+		if(faceSystemEnabled()) then
+			RevertOldFaces = getVariableFromFile("v2k4settings.txt", "RevertOldFaces")
+		end
 		
-		RevertOldFaces = getVariableFromFile("v2k4settings.txt", "RevertOldFaces")
-		
-		--local kitFile = "DynamicSystem\\Teams\\" .. tostring(player.TeamId) .. "\\Kit.txt"
-		
-		
-		--if(file_exists(kitFile)) then
-		--	player.JerseyFit = tonumber(getVariableFromFile2(kitFile, "JerseyFit", player.JerseyFit))
-		--	player.JerseyCollarType = tonumber(getVariableFromFile2(kitFile, "JerseyCollarType", player.JerseyCollarType))
-		--end
-		
-		-- This must be done through player_kit
-		---doTattooSystem(player)
+		UseGenericBootReplacement = getVariableFromFile2("v2k4settings.txt", "UseGenericBootReplacement", UseGenericBootReplacement)
+		UseGenericBootReplacement = getVariableFromFile2("DynamicSystem\\Settings.txt", "UseGenericBootReplacement", UseGenericBootReplacement)
 		
 	end
 		
@@ -990,6 +1044,14 @@ function PlayerUpdate()
 		player.FacialHairType = 0
 	end
 	
+	if (player.Gender == 1) then
+		player.BodyType = 1
+	end
+	
+	if (UseGenericBootReplacement == "1" and player.ShoeType == 0) then
+		player.ShoeType = DoGenericBootReplacement(player.PlayerId, player.ShoeType)
+	end
+	
 	if (DebugMode == "1") then
 	
 		local file_post_editing = io.open("v2k4_player_post_edit.json", "w")
@@ -1000,4 +1062,7 @@ function PlayerUpdate()
 	
 
 end
+
+
+
 
