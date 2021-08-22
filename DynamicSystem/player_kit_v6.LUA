@@ -5,237 +5,6 @@ SETTING_DecalsUseExtraMaps = false
 SETTING_EnableStrandHair = false
 -------------------------------------------------
 
--------------------------
------ PAULS HELPERS -----
-
-local DirectoryDynamicSystem = 'DynamicSystem'
-local DirectoryDynamicSystem_Teams = 'DynamicSystem\\Teams'
-local DebugFileLocation = 'DynamicSystem\\v2k4debugfile_player_kit.txt'
-
-function logToDebugFile(txt)
-	
-	if(directoryExists2(DirectoryDynamicSystem)) then 
-	
-		if(file_exists(DebugFileLocation) == false) then
-			
-			local debugFile = io.open(DebugFileLocation, 'w')
-			debugFile:close()
-		end
-	
-		if(file_exists(DebugFileLocation)) then 
-			-- Open the file in r mode (don't modify file, just read)
-			local out = io.open(DebugFileLocation, 'r')
-
-			local lines = {}
-			for line in out:lines() do
-				table.insert(lines, line)
-			end
-			
-			-- Close the file so that we can open it in a different mode
-			out:close()
-			
-			-- Insert what we want to write to the first line into the table
-			table.insert(lines, 1, txt .. "\n")
-
-			-- Open temporary file in w mode (write data)
-			-- Iterate through the lines table and write each line to the file
-			local out = io.open('v2k4debugfile_player_kit.file.tmp.txt', 'w')
-			for _, line in ipairs(lines) do
-				out:write(line .. "\n")
-			end
-			out:close()
-
-			-- At this point, we should have successfully written the data to the temporary file
-
-			-- Delete the old file
-			os.remove(DebugFileLocation)
-
-			-- Rename the new file
-			os.rename('v2k4debugfile_player_kit.file.tmp.txt', DebugFileLocation)
-		end
-	
-	end
-
-end
-
-
-
-function dumpJson(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. ''..k..' : ' .. dumpJson(v) .. ',\n'
-      end
-      return s .. '}\n '
-   else
-      return tostring(o)
-   end
-end
-
-function dumpKeyValue(o) 
-	local s = ''
-	for k, v in pairs(o) do
-		s = s .. k
-		s = s .. '='
-		s = s .. v
-		s = s .. "\n"
-		
-	end
-	return s
-end
-
-function directoryExists2(directory)
-  local ok, err, code = os.rename(directory, directory)
-   if not ok then
-      if code == 13 then
-         -- Permission denied, but it exists
-         return true
-      end
-   end
-   return ok, err
-end
-
-function file_exists(file)
-  local f = io.open(file, "rb")
-  if f then f:close() end
-  return f ~= nil
-end
-
-function file_exists_checked(file)
-
-	local status, exists = pcall(file_exists, file)
-	
-	return (status and exists)
-
-end
-
--- get all lines from a file, returns an empty 
--- list/table if the file does not exist
-function lines_from(file)
-  if not file_exists_checked(file) then return {} end
-  lines = {}
-  for line in io.lines(file) do 
-    lines[#lines + 1] = line
-  end
-  return lines
-end
-
-function mysplit (inputstr, sep)
-        if sep == nil then
-                sep = "%s"
-        end
-        local t={}
-        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-                table.insert(t, str)
-        end
-        return t
-end
-
-function split(s, delimiter)
-    result = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        table.insert(result, match);
-    end
-    return result;
-end
-
-function contains(list, x)
-	for _, v in pairs(list) do
-		if v == x then return true end
-	end
-	return false
-end
-
-function getVariableFromTable(t, vr) 
-	if contains(t, vr) then 
-		
-		for _, v in pairs(t) do
-		if v == vr then return t[vr] end
-	end
-	
-	end
-	return nil
-end
-
-function getVariableFromFile(file, variableToGet) 
-
-	local status, exists = pcall(file_exists, file)
-
-	if(status and exists) then
-		
-		local status2, lines = pcall(lines_from, file)
-		if(status2 == false) then
-			return nil
-		end
-		
-		for k,v in pairs(lines) do
-		
-			local r = split(v, '=')
-			
-			
-			local varName = ""
-			local varValue = ""
-			for key, value in pairs(r) do
-			
-				if (varName == "") then
-					varName = value
-				
-				else
-					varValue = value
-					
-					if varName == variableToGet then
-						return varValue
-					end
-					
-				end
-			end
-		end
-	end
-	
-	return nil
-end
-
-function getVariableFromFile2(file, variableToGet, valueIfNil)
-	local tmp = getVariableFromFile(file, variableToGet)
-	if(tmp == nil) then
-		tmp = valueIfNil
-	end
-	
-	return tmp
-end 
-
-local function getKitFileLocation(initData) 
-
-	local kitFile = "DynamicSystem\\Teams\\" .. tostring(initData.TeamId) .. "\\Kit_" .. tostring(initData.KitType) .. ".txt"
-	return kitFile
-end
-
-local function kitFileExists(initData) 
-
-	return file_exists_checked(getKitFileLocation(initData))
-	
-end
-
-local function kitSystemEnabled() 
-
-	local result = "0"
-	if(file_exists("v2k4Settings.txt")) then
-	
-		result = getVariableFromFile2("v2k4Settings.txt", "UseKitSystem", result)
-	
-	end
-		
-	if(file_exists("DynamicSystem\\Settings.txt")) then
-	
-		result = getVariableFromFile2("DynamicSystem\\Settings.txt", "UseKitSystem", result)
-	
-	end
-
-
-	return result == "1"
-end
-
 setGlobalEnum("ShaderDrawOrder")
 setGlobalEnum("ShaderDrawOrderSubOrder")
 setGlobalEnum("RenderFormat")
@@ -577,44 +346,14 @@ local function bindShorts(initData, shorts_mesh,
 	material:addVector("numberUnitsBounds", hotspot.Units)
 	material:addVector("numberTensBounds", hotspot.Tens)
 
+
 	material:addVector("primaryColor", initData.KitColorShortPri)
 	material:addVector("secondaryColor", initData.KitColorShortSec)
 	material:addVector("tertiaryColor", initData.KitColorShortTer)
-	
-	-- do not use, it does some OS stuff which alt-tabs the window
-	-- local current_dir=io.popen"cd":read'*l'
-	--logToDebugFile("BindShorts:: Looking for Dynamic System folder in " .. current_dir)
-	--logToDebugFile("BindShorts:: Looking for Dynamic System folder")
-	
-	--logToDebugFile("BindShorts:: ColorMap " .. colorMap)
-	
-	
-	local primaryNumberColor = initData.ShortsNumberColorPri
-	local secondaryNumberColor = initData.ShortsNumberColorSec
-	local tertiaryNumberColor = initData.ShortsNumberColorTer
-	
-	local kitFile = getKitFileLocation(initData)
-	
-	if(kitSystemEnabled() and kitFileExists(initData)) then
 
---logToDebugFile("BindShorts:: Found " .. kitFile)
-
-		primaryNumberColor = getVariableFromFile2(kitFile, "ShortsPrimaryNumberColor", primaryNumberColor)
-				
-		secondaryNumberColor = getVariableFromFile2(kitFile, "ShortsSecondaryNumberColor", secondaryNumberColor)
-		
-		tertiaryNumberColor = getVariableFromFile2(kitFile, "ShortsTertiaryNumberColor", tertiaryNumberColor)
-
-	end
-	
-	
-	material:addVector("primaryNumberColor", primaryNumberColor)
-	material:addVector("secondaryNumberColor", secondaryNumberColor)
-	material:addVector("tertiaryNumberColor", tertiaryNumberColor)
-	--material:addVector("primaryNumberColor", initData.ShortsNumberColorPri)
-	--material:addVector("secondaryNumberColor", initData.ShortsNumberColorSec)
-	--material:addVector("tertiaryNumberColor", initData.ShortsNumberColorTer)
-	
+	material:addVector("primaryNumberColor", initData.ShortsNumberColorPri)
+	material:addVector("secondaryNumberColor", initData.ShortsNumberColorSec)
+	material:addVector("tertiaryNumberColor", initData.ShortsNumberColorTer)
 
 	return item
 end
@@ -634,6 +373,7 @@ local function bindJersey(initData, jersey_mesh, is_hangingjersey,
 	local item = createItem("jersey", slots.jersey, initData.laneId)
 	item:setTagHashes("jersey")
 	item:setIncludeCullTagHashes("JerseyCloth", "JerseyNoCloth")
+	--item:setExcludeCullTagHashes("WarmupGear")
 
 	item:addMeshLodPair(lod0, jersey_mesh, bbox_update, playerDrawOrder, playerDrawSubOrder)
 
@@ -680,39 +420,10 @@ local function bindJersey(initData, jersey_mesh, is_hangingjersey,
 	material:addVector("primaryColor", initData.KitColorJerseyPri)
 	material:addVector("secondaryColor", initData.KitColorJerseySec)
 	material:addVector("tertiaryColor", initData.KitColorJerseyTer)
-	--material:addVector("primaryColor", 0x00000000)
-	--material:addVector("secondaryColor", 0x00000000)
-	--material:addVector("secondaryColor", 0x00000000)
-	
-	
-	
-	
-	local primaryNumberColor = initData.JerseyNumberColorPri
-	local secondaryNumberColor = initData.JerseyNumberColorSec
-	local tertiaryNumberColor = initData.JerseyNumberColorTer
-	
-	
-	local kitFile = getKitFileLocation(initData)
-	
-	if(kitSystemEnabled() and kitFileExists(initData)) then
 
---logToDebugFile("bindJersey:: Found " .. kitFile)
-
-		primaryNumberColor = getVariableFromFile2(kitFile, "JerseyPrimaryNumberColor", primaryNumberColor)
-				
-		secondaryNumberColor = getVariableFromFile2(kitFile, "JerseySecondaryNumberColor", secondaryNumberColor)
-		
-		tertiaryNumberColor = getVariableFromFile2(kitFile, "JerseyTertiaryNumberColor", tertiaryNumberColor)
-
-	end
-	
-	material:addVector("primaryNumberColor", primaryNumberColor)
-	material:addVector("secondaryNumberColor", secondaryNumberColor)
-	material:addVector("tertiaryNumberColor", tertiaryNumberColor)
-
-	--material:addVector("primaryNumberColor", initData.JerseyNumberColorPri)
-	--material:addVector("secondaryNumberColor", initData.JerseyNumberColorSec)
-	--material:addVector("tertiaryNumberColor", initData.JerseyNumberColorTer)
+	material:addVector("primaryNumberColor", initData.JerseyNumberColorPri)
+	material:addVector("secondaryNumberColor", initData.JerseyNumberColorSec)
+	material:addVector("tertiaryNumberColor", initData.JerseyNumberColorTer)
 
 	-- runtime generated textures
 	material:addGenTexture("nameTexture", playerNameGeneratedMap)
@@ -1024,8 +735,6 @@ local function bindHead(initData, head_mesh, lod1_mesh, lod2_mesh,
 	-- eyesMaterial:addTexture("coefficientTexture", eyeCoeffMap)
 	---eyesMaterial:addTexture("normalTexture", eyeNormalMap)
 	
-	---eyesMaterial:addTexture("normalTexture", eyeNormalMap)
-	
 	return item
 end
 
@@ -1079,24 +788,6 @@ local function buildWarmupBib(initData, mesh, colorMap)
 	local home_clr = {0.94, 0.3, 0.1, 0}
 	local away_clr = {0.91, 0.91, 0.07, 0} 
 	local custom_clr = {1, 0, 0, 0}
-	
-	
-	local BibColorR = home_clr[0]
-	local BibColorG = home_clr[1]
-	local BibColorB = home_clr[2]
-	
-	--local kitFile = "DynamicSystem\\Teams\\" .. tostring(initData.TeamId) .. "\\Kit_" .. initData.TeamSide .. ".txt"
-	--if(file_exists(kitFile)) then
-
-	--	BibColorR = getVariableFromFile2(kitFile, "BibColorR", BibColorR)		
-	--	BibColorG = getVariableFromFile2(kitFile, "BibColorG", BibColorG)		
-	--	BibColorB = getVariableFromFile2(kitFile, "BibColorB", BibColorB)
-		
-	--end
-	
-	home_clr = {BibColorR, BibColorG, BibColorB}
-	away_clr = {BibColorR, BibColorG, BibColorB}
-	
 	local team_clr = initData.TeamSide == 0 and home_clr or away_clr
 	local clr0 = initData.HasCustomBib == 0 and team_clr or custom_clr
 
@@ -1413,8 +1104,6 @@ local function loadKitShorts(items, initData, hotspotAsset)
 	local dirt_type = initData.DirtType
 	local short_style = initData.ShortStyle
 	
-	
-	
 	-- todo: why do we have duplicated short assets without cloth suffix?
 	-- shorts and gkpants
 	local shorts_name = string.format("shorts_0_%d_%d_cloth;shorts_0_%d_%d", short_style, gender, short_style, gender)
@@ -1562,7 +1251,7 @@ local function loadKitJersey(items, generatedTextures, initData, hotspotAsset, c
 	local dirt_type = initData.DirtType
 	local jersey_tucked = initData.JerseyTucked
 	local jersey_fit = initData.JerseyFit
-	
+
 	local is_cloth = _isClothJersey(initData) and "_cloth" or ""
 	
 	local jersey_name, brt_name
@@ -1602,10 +1291,6 @@ local function loadKitJersey(items, generatedTextures, initData, hotspotAsset, c
 	if is_hangingjersey then wrinkle_normal = "jersey_0_normal" end
 
 	local colorMap = loadAsync(brts.kit, color_name)
-	--local fileDumpBRTSKIT = io.open("fileDumpBRTSKIT.json", "w")
-	--fileDumpBRTSKIT:write(dumpJson(brts))
-	--fileDumpBRTSKIT:close()
-	
 	local aoMap = loadAsync(brts.kit, ao_name)
 
 	local coeffMap = loadAsync(brts.kit, coeff_name)
@@ -2203,8 +1888,7 @@ local function loadUpperBody(items, generatedTextures, initData)
 	local allow_missing = true
 	local disallow_missing = false
 	local use_kit_body = initData.UsePlayerArms ~= 0
-	--local need_tattoo_stamping = initData.HasTattooUpperBody ~= 0
-	local need_tattoo_stamping = true
+	local need_tattoo_stamping = initData.HasTattooUpperBody ~= 0
 	local db_gender = initData.Gender
 
 	-- load female body skin when players are children. 
@@ -2243,40 +1927,8 @@ local function loadUpperBody(items, generatedTextures, initData)
 	-- composite tattoos if necessary
 	local generatedSkinMap = nil
 
+	-- yury todo: there is no bools in initData
 	if need_tattoo_stamping then
-	
-		-- loading via player file
-		local playerFile = "DynamicSystem\\Players\\" .. tostring(initData.PlayerId) .. ".txt"
-		
-		if(file_exists_checked(playerFile)) then
-			
-			initData.HasTattooUpperBody = getVariableFromFile2(playerFile, "HasTattooUpperBody", initData.HasTattooUpperBody)
-			initData.TattooTorsoBack = getVariableFromFile2(playerFile, "TattooTorsoBack", initData.TattooTorsoBack)
-			
-			initData.TattooRightArm = tonumber(getVariableFromFile2(playerFile, "TattooRightArm", initData.TattooRightArm))
-			if(initData.TattooRightArm ~= 0) then
-				initData.HasTattooUpperBody = 1
-			end
-			
-			initData.TattooLeftArm = tonumber(getVariableFromFile2(playerFile, "TattooLeftArm", initData.TattooRightArm))
-			if(initData.TattooLeftArm ~= 0) then
-				initData.HasTattooUpperBody = 1
-			end
-			
-			initData.TattooRightLeg = tonumber(getVariableFromFile2(playerFile, "TattooRightLeg", initData.TattooRightLeg))
-			if(initData.TattooRightLeg ~= 0) then
-				initData.HasTattooLowerBody = 1
-			end
-			
-			initData.TattooLeftLeg = tonumber(getVariableFromFile2(playerFile, "TattooLeftLeg", initData.TattooLeftLeg))
-			if(initData.TattooLeftLeg ~= 0) then
-				initData.HasTattooLowerBody = 1
-			end
-		end
-	
-	
-	
-	
 		local tattoo0, hotspot0 = _loadTattoo(initData.TattooRightArm)
 		local tattoo1, hotspot1 = _loadTattoo(initData.TattooLeftArm)
 		local tattoo2, hotspot2 = _loadTattoo(initData.TattooTorsoBack)
@@ -2664,32 +2316,17 @@ local function loadRefAccessory(items, laneId, tag, model, variation, gender)
 	end
 end
 
-local function getPlayerFileLocation(initData)
-
-	local playerFile = "DynamicSystem\\Players\\" .. tostring(initData.PlayerId) .. ".txt"
-	
-	return playerFile
-
-end
-
 -----------------------------------------------------------------------------
 local function loadPlayerBeard(items, initData)
 	local isCreatedPlayer = initData.IsCreatedPlayer ~= 0
 	if not isCreatedPlayer or initData.FacialHairType < 1 then 
 		return false 
 	end
-	
+
 	local allow_missing = true
 	local model = initData.FacialHairType
 	local headclass = 1 -- always generic 
 	local variation = 0 -- no variation / hairstyle
-	
-	--if(file_exists(getPlayerFileLocation(initData))) then
-	--	local newBeard = getVariableFromFile2(playerFile, "Beard", initData.FacialHairType)
-	--	if(newBeard == 0 or newBeard == nil) then
-	--		return false
-	--	end
-	--end
 
 	local hair_name = string.format("facialhair_%d_%d_%d", model, headclass, variation)
 	local haircap_name = string.format("facialhaircap_%d_%d_%d", model, headclass, variation)
@@ -2895,12 +2532,14 @@ function loadPlayerKit(initData)
 	local items = {}
 	local generatedTextures = {}
 	local assets = {}
-
-	-- hotspots
-	local hotspotAsset, competitionHotspot = loadHotspots(initData)
 	
 	loadv2k4Kit(initData)
 	loadv2k4Tattoo(initData)
+	loadv2k4Head(initData)
+	loadv2k4Boot(initData)
+
+	-- hotspots
+	local hotspotAsset, competitionHotspot = loadHotspots(initData)
 
 	-- schedule texture generation first
 
@@ -3102,17 +2741,319 @@ function loadHighResFan(initData)
 	return items, generatedTextures, assets
 end
 
+
+
+-------------------------
+----- PAULS HELPERS -----
+
+local DirectoryDynamicSystem = 'DynamicSystem'
+local DirectoryDynamicSystem_Teams = 'DynamicSystem\\Teams'
+local DebugFileLocation = 'DynamicSystem\\v2k4debugfile_player_kit.txt'
+
+function logToDebugFile(txt)
+	
+	if(directoryExists2(DirectoryDynamicSystem)) then 
+	
+		if(file_exists(DebugFileLocation) == false) then
+			
+			local debugFile = io.open(DebugFileLocation, 'w')
+			debugFile:close()
+		end
+	
+		if(file_exists(DebugFileLocation)) then 
+			-- Open the file in r mode (don't modify file, just read)
+			local out = io.open(DebugFileLocation, 'r')
+
+			local lines = {}
+			for line in out:lines() do
+				table.insert(lines, line)
+			end
+			
+			-- Close the file so that we can open it in a different mode
+			out:close()
+			
+			-- Insert what we want to write to the first line into the table
+			table.insert(lines, 1, txt .. "\n")
+
+			-- Open temporary file in w mode (write data)
+			-- Iterate through the lines table and write each line to the file
+			local out = io.open('v2k4debugfile_player_kit.file.tmp.txt', 'w')
+			for _, line in ipairs(lines) do
+				out:write(line .. "\n")
+			end
+			out:close()
+
+			-- At this point, we should have successfully written the data to the temporary file
+
+			-- Delete the old file
+			os.remove(DebugFileLocation)
+
+			-- Rename the new file
+			os.rename('v2k4debugfile_player_kit.file.tmp.txt', DebugFileLocation)
+		end
+	
+	end
+
+end
+
+
+
+function dumpJson(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. ''..k..' : ' .. dumpJson(v) .. ',\n'
+      end
+      return s .. '}\n '
+   else
+      return tostring(o)
+   end
+end
+
+function dumpKeyValue(o) 
+	local s = ''
+	for k, v in pairs(o) do
+		s = s .. k
+		s = s .. '='
+		s = s .. v
+		s = s .. "\n"
+		
+	end
+	return s
+end
+
+function directoryExists2(directory)
+  local ok, err, code = os.rename(directory, directory)
+   if not ok then
+      if code == 13 then
+         -- Permission denied, but it exists
+         return true
+      end
+   end
+   return ok, err
+end
+
+function file_exists(file)
+  local f = io.open(file, "rb")
+  if f then f:close() end
+  return f ~= nil
+end
+
+function file_exists_checked(file)
+
+	local status, exists = pcall(file_exists, file)
+	
+	return (status and exists)
+
+end
+
+-- get all lines from a file, returns an empty 
+-- list/table if the file does not exist
+function lines_from(file)
+  if not file_exists_checked(file) then return {} end
+  lines = {}
+  for line in io.lines(file) do 
+    lines[#lines + 1] = line
+  end
+  return lines
+end
+
+function mysplit (inputstr, sep)
+        if sep == nil then
+                sep = "%s"
+        end
+        local t={}
+        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+                table.insert(t, str)
+        end
+        return t
+end
+
+function split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
+function contains(list, x)
+	for _, v in pairs(list) do
+		if v == x then return true end
+	end
+	return false
+end
+
+function getVariableFromTable(t, vr) 
+	if contains(t, vr) then 
+		
+		for _, v in pairs(t) do
+		if v == vr then return t[vr] end
+	end
+	
+	end
+	return nil
+end
+
+local fileVariables = {}
+
+function getAllVariablesIntoDictionary(file)
+	
+	local exists = file_exists(file)
+
+	if(exists) then
+		
+		
+		
+		local l = lines_from(file)
+		
+		local file_table = {}
+		
+		for k,v in pairs(l) do
+		
+			local r = split(v, '=')
+			
+			
+			local varName = ""
+			local varValue = ""
+			for key, value in pairs(r) do
+				
+				
+				if (varName == "") then
+					varName = value
+				
+				else
+					varValue = value
+					
+					file_table[varName] = varValue
+					varName = ""
+					
+				end
+			end
+			
+		end
+		
+		fileVariables[file] = file_table
+		
+	end
+
+end
+
+function getVariableFromFile(file, variableToGet) 
+
+	--local status, exists = pcall(file_exists, file)
+local exists = file_exists(file)
+	--if(status and exists) then
+	if (exists) then
+	
+		if(fileVariables[file] == nil) then
+			getAllVariablesIntoDictionary(file)
+		end
+		
+		if(fileVariables[file] ~= nil) then
+		
+			return fileVariables[file][variableToGet]
+		
+		end
+		
+		--local status2, lines = pcall(lines_from, file)
+		--if(status2 == false) then
+		--	return nil
+		--end
+		
+		--local l = lines_from(file)
+		
+		--for k,v in pairs(l) do
+		
+		--	local r = split(v, '=')
+			
+			
+		--	local varName = ""
+		--	local varValue = ""
+		--	for key, value in pairs(r) do
+			
+		--		if (varName == "") then
+		--			varName = value
+				
+		--		else
+		--			varValue = value
+					
+		--			if varName == variableToGet then
+		--				return varValue
+		--			end
+					
+		--		end
+		--	end
+		--end
+	end
+	
+	return nil
+end
+
+function getVariableFromFile2(file, variableToGet, valueIfNil)
+	local tmp = getVariableFromFile(file, variableToGet)
+	if(tmp == nil) then
+		tmp = valueIfNil
+	end
+	
+	return tmp
+end 
+
+local function getKitFileLocation(initData) 
+
+	local kitFile = "DynamicSystem\\Teams\\" .. tostring(initData.TeamId) .. "\\Kit_" .. tostring(initData.KitType) .. ".txt"
+	return kitFile
+end
+
+local function kitFileExists(initData) 
+
+	--return file_exists_checked(getKitFileLocation(initData))
+	return file_exists(getKitFileLocation(initData))
+end
+
+local function kitSystemEnabled() 
+
+	local result = "0"
+	if(file_exists("v2k4Settings.txt")) then
+	
+		result = getVariableFromFile2("v2k4Settings.txt", "UseKitSystem", result)
+	
+	end
+		
+	if(file_exists("DynamicSystem\\Settings.txt")) then
+	
+		result = getVariableFromFile2("DynamicSystem\\Settings.txt", "UseKitSystem", result)
+	
+	end
+
+
+	return result == "1"
+end
+
+
+------------------------------------------------------
+-- CORE V2k4 Functions
+------------------------------------------------------
 function loadv2k4Kit(initData)
 
 	
 	local kitFile = getKitFileLocation(initData)
 	if(kitSystemEnabled() and kitFileExists(initData)) then
-		jersey_fit = getVariableFromFile2(kitFile, "JerseyFit", jersey_fit)
-		initData.JerseyFit = jersey_fit
+				
 		initData.Kit = getVariableFromFile2(kitFile, "ReplacementKit", initData.Kit)
+		initData.JerseyCollarType = getVariableFromFile2(kitFile, "JerseyCollarType", initData.JerseyCollarType)
+		
+		initData.JerseyNumberColorPri = getVariableFromFile2(kitFile, "JerseyNumberColorPrimary", initData.JerseyNumberColorPri)
+		initData.JerseyNumberColorSec = getVariableFromFile2(kitFile, "JerseyNumberColorSecondary", initData.JerseyNumberColorSec)
+		initData.JerseyNumberColorTer = getVariableFromFile2(kitFile, "JerseyNumberColorTertiary", initData.JerseyNumberColorTer)
+	
+		initData.ShortsNumberColorPri = getVariableFromFile2(kitFile, "ShortsNumberColorPrimary", initData.ShortsNumberColorPri)		
+		initData.ShortsNumberColorSec = getVariableFromFile2(kitFile, "ShortsNumberColorSecondary", initData.ShortsNumberColorSec)
+		initData.ShortsNumberColorTer = getVariableFromFile2(kitFile, "ShortsNumberColorTertiary", initData.ShortsNumberColorTer)
+
+		initData.KitNameColor = getVariableFromFile2(kitFile, "KitNameColor", initData.KitNameColor)
 	end
-
-
 
 end
 
@@ -3146,5 +3087,73 @@ function loadv2k4Tattoo(initData)
 		end
 	end
 
+	local tattooRightArmFile = "DynamicSystem\\Players\\_TattooAssignment_RightArm.txt"
+	if(file_exists(tattooRightArmFile)) then
+		
+		initData.TattooRightArm = tonumber(getVariableFromFile2(tattooRightArmFile, tostring(initData.PlayerId), initData.TattooRightArm))
+		if(initData.TattooRightArm ~= 0) then
+			initData.HasTattooUpperBody = 1
+		end
+		
+	end
+	
+	local tattooLeftArmFile = "DynamicSystem\\Players\\_TattooAssignment_LeftArm.txt"
+	if(file_exists(tattooLeftArmFile)) then
+		
+		initData.TattooLeftArm = tonumber(getVariableFromFile2(tattooLeftArmFile, tostring(initData.PlayerId), initData.TattooLeftArm))
+		if(initData.TattooLeftArm ~= 0) then
+			initData.HasTattooUpperBody = 1
+		end
+		
+	end
+	
+	local tattooRightLegFile = "DynamicSystem\\Players\\_TattooAssignment_RightLeg.txt"
+	if(file_exists(tattooRightLegFile)) then
+		
+		initData.TattooRightLeg = tonumber(getVariableFromFile2(tattooRightLegFile, tostring(initData.PlayerId), initData.TattooRightLeg))
+		if(initData.TattooRightLeg ~= 0) then
+			initData.HasTattooLowerBody = 1
+		end
+		
+	end
+	
+	local tattooLeftLegFile = "DynamicSystem\\Players\\_TattooAssignment_LeftLeg.txt"
+	if(file_exists(tattooLeftLegFile)) then
+		
+		initData.TattooLeftLeg = tonumber(getVariableFromFile2(tattooLeftLegFile, tostring(initData.PlayerId), initData.TattooLeftLeg))
+		if(initData.TattooLeftLeg ~= 0) then
+			initData.HasTattooLowerBody = 1
+		end
+		
+	end
+end
+
+
+function loadv2k4Head(initData)
+
+	local a = 1
+
+end
+
+local DebugMode = 1
+
+function loadv2k4Boot(initData)
+
+	local fileLoc = "DynamicSystem\\Players\\_BootAssignment.txt"
+	local playerFile = "DynamicSystem\\Players\\" .. tostring(initData.PlayerId) .. ".txt"
+	if(file_exists(fileLoc)) then 
+
+		if(DebugMode == 1) then
+			logToDebugFile("player_kit.lua::loadv2k4Boot:DynamicSystem\\Players\\_BootAssignment.txt:found")
+		end
+		
+		initData.ShoeType = getVariableFromFile2(fileLoc, initData.PlayerId, initData.ShoeType)
+		
+	elseif(file_exists(playerFile)) then
+
+	
+		initData.ShoeType = getVariableFromFile2(playerFile, "Boot", initData.ShoeType)
+	
+	end
 
 end
