@@ -1,0 +1,36 @@
+BuyerCounterOfferValue,,,,
+% of difference offer,0%,25%,50%,75%
+20,50,30,20,10
+40,40,25,20,15
+60,30,25,25,20
+80,25,25,30,20
+,,,,
+BuyerCounterOfferValueForHighDemand,,,,
+Demanded/MaxOffer %,same chances as above,,,
+100,30,25,25,20
+120,30,25,25,20
+135,35,25,25,15
+150,50,30,20,10
+,,,,
+BuyerCounterOfferPlayerRankModifier,,,,
+rank,low % change,high % change,,
+1,-5,50,,
+2,-5,25,,
+3,-5,10,,
+4,-5,5,,
+5,0,0,,
+6,0,0,,
+,,,,
+BuyerCounterOfferValueForPlayer,,,,
+% of difference offer,0%,25%,50%,75%
+20,40,30,20,10
+40,40,35,25,10
+60,35,25,25,15
+80,25,25,30,20
+,,,,
+BuyerCounterForPlayerForHighDemand,,,,
+Demanded/MaxOffer %,same chances as above,,,
+100,25,30,30,15
+120,25,30,30,15
+135,25,35,25,15
+150,25,30,25,20

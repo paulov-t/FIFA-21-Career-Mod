@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FolderAsset id="daa5263e-e5e1-40ea-953a-51ceae029814" name="Player Stories" deleted="False">
+  <references>
+    <reference id="bb3d9123-ee8b-488a-96ad-2232267bfc66" />
+    <reference id="ad20b678-f736-409d-aa6e-aed4dfd1f57e" />
+    <reference id="7d6d2a2d-2c24-4553-87a8-0251ab14a5a6" />
+    <reference id="0b322b78-fe48-4358-9916-85e74bb4f2fb" />
+    <reference id="a975ceed-7ed2-4826-a352-c6a0d42f7d39" />
+    <reference id="f988d3b8-11c4-4e9e-ac52-f9ff7503a4e9" />
+    <reference id="07b66b32-b7dc-4df5-862e-fac116e7d335" />
+    <reference id="50408a68-90b1-4d3e-847e-85f7af06c3b2" />
+    <reference id="a4513a71-10d0-4fe0-a2fe-ca35837a49ec" />
+    <reference id="5641f4a9-f024-44ce-853b-f3c1d16db395" />
+    <reference id="0705bf44-b992-4502-bb3b-90366ce7bdab" />
+  </references>
+</FolderAsset>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FolderAsset id="c9e0e74f-3ed3-4c18-98ef-3016f3f6e204" name="Debug" deleted="True">
+  <references>
+    <reference id="c1ea1dcb-5788-4ebc-93c5-179a3ce49057" />
+    <reference id="a2eb65e9-92b5-4c95-a5f9-2d194b5ffa79" />
+    <reference id="84f86297-48cb-4e49-a636-932c72335bcd" />
+    <reference id="67e91b4b-33fd-48ed-8e85-82faf4108956" />
+    <reference id="02cbea49-b243-46ad-8b26-2115ceec79be" />
+  </references>
+</FolderAsset>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FolderAsset id="327d6f59-46ad-4b76-ab94-f8b27ba6647a" name="Player Events" deleted="False">
+  <references>
+    <reference id="56bc4671-8846-4ae3-add0-8c8ba60c17fd" />
+    <reference id="d8541139-3dec-4b1e-a74f-3e5e875f7934" />
+    <reference id="f98bea83-f1b7-42d2-92fb-8dcbbae77378" />
+    <reference id="6006d6d0-fa13-4d53-8ad8-c4e65406a664" />
+    <reference id="eddb5689-8029-4c21-b336-6c19be3e1436" />
+  </references>
+</FolderAsset>

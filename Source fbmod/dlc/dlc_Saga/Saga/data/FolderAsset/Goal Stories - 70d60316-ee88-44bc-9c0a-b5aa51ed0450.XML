@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FolderAsset id="70d60316-ee88-44bc-9c0a-b5aa51ed0450" name="Goal Stories" deleted="False">
+  <references>
+    <reference id="c5b0c839-6009-4ec0-8eab-94d76bb8c080" />
+    <reference id="3ee722ca-58d6-4bdb-b779-9b1ba39e8c93" />
+    <reference id="7e5a0de0-b393-4fb5-a441-9ded0b9b125d" />
+    <reference id="62b33ae3-2c5b-40b3-9ea5-2cf0c16e9b96" />
+    <reference id="66740c63-e75c-4da0-bb6c-2070615b4bcd" />
+  </references>
+</FolderAsset>
