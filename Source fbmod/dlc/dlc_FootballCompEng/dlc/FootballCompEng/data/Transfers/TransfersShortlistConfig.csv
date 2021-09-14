@@ -1,6 +1,6 @@
 ,Scoring Criteria Weights,,,"// the weights are multiplied with the score returned by the evaluation criteria [0, 1.f]",,,,,
 ,Overall,Potential,Age,Position,Free Agents,Pre Contract,Loan Listed,Transfer Listed,Monitored
-Improve squad,1.28,1,0.99,0.6,1.2,1.2,0,1.2,4
+Improve squad,1,0.5,0.5,0.5,1,1,0,0.5,1.5
 Next big thing,0.8,1.9,-0.5,0.6,0,0,0,0,4
 Loans,0.99,1.95,0.05,0.5,0,0,0.6,0,100
 ,,,,,,,,,
@@ -16,10 +16,10 @@ Max Age Next Big Thing,21,,,,,,,,
 Max Age Loan,23,,,,,,,,
 ,,,,,,,,,
 Improve Squad Overall Min Threshold,1.1,,// relative weakest area average ,,,,,,
-Improve Squad Overall Max Threshold,1.2,,,,,,,,
+Improve Squad Overall Max Threshold,1.26,,,,,,,,
 ,,,,,,,,,
 Improve Squad Bias Overall,80,82,100,,// Overall values lower than this value get the respective bias,,,,
-Improve Squad Bias Value,0,0.8,0.12,,// This value is added to the improve squad overall max threshold,,,,
+Improve Squad Bias Value,0,0,0,,// This value is added to the improve squad overall max threshold,,,,
 ,,,,,,,,,
 Loan Overall Min Threshold,0.98,,// relative weakest area average ,,,,,,
 Loan Overall Max Threshold,1.12,,,,,,,,

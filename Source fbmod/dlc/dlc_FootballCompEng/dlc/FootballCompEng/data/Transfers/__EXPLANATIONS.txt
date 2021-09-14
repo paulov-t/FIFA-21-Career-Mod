@@ -1,0 +1,8 @@
+NegotiationsDemandsSettings 
+	- the the amount is expects in the buying screen compared to your offer
+	- the contract length each role asks for.
+NegotiationsOfferSettings 
+	- is the amount to put on the transfer hub screen for a fair offer
+
+- BuyerAcceptanceForPlayer
+	- Affects offer amount and AI acceptance amount

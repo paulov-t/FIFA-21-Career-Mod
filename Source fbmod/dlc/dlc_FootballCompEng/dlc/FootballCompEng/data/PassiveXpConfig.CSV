@@ -1,0 +1,21 @@
+form rating,xp for growth plan (increase),xp for growth plan (decline),xp for converstion plan (increase),xp for conversion plan (decline)
+0 (recovery),0,0,0,0
+1 (very bad),25,225,25,225
+2 (bad),30,200,30,200
+3 (neutral),40,175,40,175
+4 (good),50,150,50,150
+5 (very good),60,125,60,125
+,,,,
+injury penalty,150,,,
+conversion to preferred pos bonus,1,,,
+,,,,
+distance of ovr/pot vs target,increase mod,decline mod,,
+-1.3,1,0.35,,
+-0.8,1,0.5,,
+-0.5,1,0.65,,
+-0.3,1,0.8,,
+0,1,1,,
+0.3,0.9,1,,
+0.5,0.75,1,,
+0.8,0.6,1,,
+1.3,0.5,1,,

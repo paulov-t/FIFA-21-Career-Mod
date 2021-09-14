@@ -2533,10 +2533,10 @@ function loadPlayerKit(initData)
 	local generatedTextures = {}
 	local assets = {}
 	
-	loadv2k4Kit(initData)
-	loadv2k4Tattoo(initData)
-	loadv2k4Head(initData)
-	loadv2k4Boot(initData)
+	pcall(loadv2k4Kit, initData)
+	pcall(loadv2k4Tattoo, initData)
+	pcall(loadv2k4Head, initData)
+	pcall(loadv2k4Boot, initData)
 
 	-- hotspots
 	local hotspotAsset, competitionHotspot = loadHotspots(initData)

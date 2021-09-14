@@ -1,14 +1,14 @@
 Description,Value,,,,,
 ,,,,,,
-Max Score,11000,"These 4 settings are used to cap player score to min and max, then scale them to min and max percent",,,,
-Min Score,1000,,,,,
-Min Percent,-100, ,,,,
+Max Score,10000,"These 4 settings are used to cap player score to min and max, then scale them to min and max percent",,,,
+Min Score,0,,,,,
+Min Percent,0, ,,,,
 Max Percent,95,,,,,
 Excess Player Rank Multiplier,90,In case there aren't enough player rank multipliers,,,,
 ,,,,,,
 Area Rank Multiplier,100,100,100,100,100,100
 ,,,,,,
-Player Rank Multiplier,110,105,100,100,100,100
+Player Rank Multiplier,100,90,80,70,60,50
 ,,,,,,
 Offer Points,0,0,0,,,
 ,These settings connect to CONTRACTLENGHTPLAYERAGE from TransfersPlayerContract.ini,,,,,
