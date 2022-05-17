@@ -1,4 +1,0 @@
-TattooRightArm=114
-TattooLeftArm=114
-Face=158023
-Beard=1

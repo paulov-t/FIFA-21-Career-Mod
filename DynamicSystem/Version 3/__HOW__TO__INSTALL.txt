@@ -1,7 +1,0 @@
-1) Extract all files to any location
-2) Launch Frostbite Modding Tool
-3) Open Launcher
-4) Import the Paulv2k4 FIFA 21 Dynamic Mod
-5) Copy all the .txt files to your FIFA 21 Installation Directory
-6) Configure OtherFaces.txt as neccessary (read instructions there)
-7) Launch the game through Frostbite Modding Tool

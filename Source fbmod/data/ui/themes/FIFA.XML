@@ -693,10 +693,10 @@
       <color NAME="COLOR_FILL_PANEL_MAINFRAME" VALUE="0x000000"/>
       <color NAME="COLOR_FILL_PANEL_HEADER" VALUE="0x000000"/>
       <color NAME="COLOR_FILL_PANEL_TITLEBAR" VALUE="@COLOR_FILL_PANEL_HEADER"/>
-      <color NAME="COLOR_FILL_PANEL_DIMMER" VALUE="0xD2D5DE"/>
-      <color NAME="COLOR_FILL_PANEL_LEGACY_1" VALUE="0xD2D5DE"/>
+      <color NAME="COLOR_FILL_PANEL_DIMMER" VALUE="0x111111"/> <!-- 0xD2D5DE -->
+      <color NAME="COLOR_FILL_PANEL_LEGACY_1" VALUE="0x111111"/> <!-- 0xD2D5DE -->
       <color NAME="COLOR_FILL_PANEL_LEGACY_2" VALUE="@COLOR_FILL_PANEL_UNHIGHLIGHT_FLUX"/>
-      <color NAME="COLOR_FILL_PANEL_LEGACY_3" VALUE="0xD2D5DE"/>
+      <color NAME="COLOR_FILL_PANEL_LEGACY_3" VALUE="0x111111"/> <!-- 0xD2D5DE -->
       <color NAME="COLOR_FILL_PANEL_LEGACY_4" VALUE="0x000000"/>
       <color NAME="COLOR_FILL_PANEL_CRUMBS" VALUE="0x2E2F41"/>
       <color NAME="COLOR_FILL_PANEL_FLUX_TRANSPARENT" VALUE="@COLOR_FILL_PANEL_UNHIGHLIGHT_FLUX"/> <!-- Standings Panel-->
@@ -1460,7 +1460,7 @@
       <alpha NAME="ALPHA_TRANSPARENT" VALUE="30"/>
       <alpha NAME="ALPHA_DISABLED" VALUE="40"/>
       <alpha NAME="ALPHA_HALF" VALUE="50"/>
-      <alpha NAME="ALPHA_DIMMER" VALUE="70"/>
+      <alpha NAME="ALPHA_DIMMER" VALUE="100"/> <!-- 70 -->
       <alpha NAME="ALPHA_INACTIVE" VALUE="80"/>
       <alpha NAME="ALPHA_FLUX_TILE_DISABLED_HL" VALUE="40"/>
       <alpha NAME="ALPHA_FLUX_TILE_DISABLED" VALUE="40"/>
@@ -1477,12 +1477,12 @@
       <alpha NAME="ALPHA_PANEL_UNHIGHLIGHT_ROWBAND" VALUE="10"/>
       <alpha NAME="ALPHA_PANEL_PREVIEW_ROWBAND" VALUE="4"/>
       <alpha NAME="ALPHA_PANEL_HIGHLIGHTPANEL_ROWBAND" VALUE="39"/>
-      <alpha NAME="ALPHA_PANEL_PREVIEW" VALUE="94"/>
+      <alpha NAME="ALPHA_PANEL_PREVIEW" VALUE="100"/> <!-- 94 -->
       <alpha NAME="ALPHA_PANEL_POPUP" VALUE="100"/>
       <alpha NAME="ALPHA_PANEL_MAINFRAME" VALUE="96"/>
       <alpha NAME="ALPHA_PANEL_HEADER" VALUE="100"/>
       <alpha NAME="ALPHA_PANEL_TITLEBAR" VALUE="100"/>
-      <alpha NAME="ALPHA_PANEL_DIMMER" VALUE="30"/>
+      <alpha NAME="ALPHA_PANEL_DIMMER" VALUE="100"/> <!-- 30 -->
       <alpha NAME="ALPHA_PANEL_LEGACY_1" VALUE="100"/>
       <alpha NAME="ALPHA_PANEL_LEGACY_2" VALUE="100"/>
       <alpha NAME="ALPHA_PANEL_LEGACY_3" VALUE="100"/>
@@ -1495,10 +1495,10 @@
       <alpha NAME="ALPHA_PANEL_INNER_UNHIGHLIGHT_FLUX" VALUE="100"/>
 
       <!-- Background -->
-      <alpha NAME="ALPHA_BACKGROUND" VALUE="@ALPHA_NONE"/>
+      <alpha NAME="ALPHA_BACKGROUND" VALUE="100"/> <!-- ALPHA_NONE -->
 
       <!-- ScreenDimmer -->
-      <alpha NAME="ALPHA_SCREEN_DIMMER" VALUE="60"/>
+      <alpha NAME="ALPHA_SCREEN_DIMMER" VALUE="100"/> <!-- 60 -->
 
       <!-- OVERLAY alpha -->
       <alpha NAME="ALPHA_LA_LIGA_PANEL" VALUE="82"/> <!-- La Liga BackPanel Alpha -->
@@ -1576,14 +1576,14 @@
       <font_size NAME="FONT_SIZE_IS" VALUE="22"/>
       <font_size NAME="FONT_SIZE_IXS" VALUE="18"/>
       <!-- GENERAL sizes -->
-      <font_size NAME="FONT_SIZE_EXTREMELY_SMALL" VALUE="16"/>
-      <font_size NAME="FONT_SIZE_SMALL" VALUE="18"/>
-      <font_size NAME="FONT_SIZE_REGULAR" VALUE="20"/>
+      <font_size NAME="FONT_SIZE_EXTREMELY_SMALL" VALUE="14"/> <!-- 16 -->
+      <font_size NAME="FONT_SIZE_SMALL" VALUE="16"/> <!-- 18 -->
+      <font_size NAME="FONT_SIZE_REGULAR" VALUE="18"/> <!-- 20 -->
       <font_size NAME="FONT_SIZE_REGULAR_FHD" VALUE="30"/>
       <font_size NAME="FONT_SIZE_REGULAR_LARGE" VALUE="40"/>
-      <font_size NAME="FONT_SIZE_TITLE" VALUE="24"/>
+      <font_size NAME="FONT_SIZE_TITLE" VALUE="22"/> <!-- 24 -->
       <font_size NAME="FONT_SIZE_TITLE_FHD" VALUE="34"/>
-      <font_size NAME="FONT_SIZE_TAB" VALUE="34"/>
+      <font_size NAME="FONT_SIZE_TAB" VALUE="32"/> <!-- 34 -->
       <font_size NAME="FONT_SIZE_TAB_SMALL" VALUE="@FONT_SIZE_TAB"/>
       <font_size NAME="FONT_SIZE_TITLEBAR_FHD" VALUE="50"/>
       <font_size NAME="FONT_SIZE_SMALL_LABEL" VALUE="24"/>
